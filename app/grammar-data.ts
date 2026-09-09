@@ -190,7 +190,645 @@ const c = (word: string, english: string, formula: string, formulaEn: string, wh
 
 export const CONNECTOR_GROUPS: ConnectorGroup[] = [
   { id: "cause", title: "原因与结果", titleEn: "Cause & Result", colour: "blue", items: [
-    c("因为……所以……", "because…therefore", "因为＋原因，所以＋结果", "因为 + cause, 所以 + result", "先给原因，再写直接结果。", "Give a reason followed by its direct re…202322 tokens truncated…{
+    c("因为……所以……", "because…therefore", "因为＋原因，所以＋结果", "因为 + cause, 所以 + result", "先给原因，再写直接结果。", "Give a reason followed by its direct result.", "因为下着大雨，所以比赛被取消了。", "Because it was raining heavily, the match was cancelled.", true),
+    c("由于……因此……", "due to…therefore", "由于＋原因，因此＋结果", "由于 + cause, 因此 + result", "用于较正式的原因和结果。", "Use for a more formal cause-and-effect relationship.", "由于雨势越来越大，因此比赛被迫暂停。", "Due to the worsening rain, the match was suspended."),
+    c("既然……就……", "since…then", "既然＋已知事实，就＋决定", "既然 + known fact, 就 + decision", "事实已经知道，再说明应该怎样做。", "Use when a fact is known and you state what should happen next.", "既然你知道错了，就应该道歉。", "Since you know you were wrong, you should apologise.", true),
+    c("所以", "so / therefore", "原因，所以＋结果", "Cause, 所以 + result", "说明一个原因带来的直接结果。", "Use for the direct result of a reason.", "天色已晚，所以我们决定回家。", "It was getting late, so we decided to go home.", true),
+    c("于是", "so / thereupon", "情况，于是＋下一步行动", "Situation, 于是 + next action", "某种情况使人物采取下一步行动。", "Use when a situation causes someone to take the next action.", "小明看见老人需要帮助，于是立刻走上前。", "Xiao Ming saw that the elderly man needed help, so he stepped forward.", true),
+    c("因此", "therefore", "原因，因此＋结论", "Cause, 因此 + conclusion", "用于较正式、合乎逻辑的结论。", "Use for a formal or logical conclusion.", "塑料难以分解，因此我们应该减少使用。", "Plastic is difficult to break down; therefore, we should reduce its use."),
+    c("结果", "as a result", "行动，结果＋后果", "Action, 结果 + consequence", "说明行动最后造成的结果，常用于不好的后果。", "Use for the actual outcome, often an unfortunate one.", "他没有留意脚下，结果滑倒了。", "He did not watch his step. As a result, he slipped.", true),
+  ]},
+  { id: "unexpected", title: "意外与发现", titleEn: "Unexpected Events & Discovery", colour: "coral", items: [
+    c("不料", "unexpectedly", "原本情况，不料＋意外事件", "Expected situation, 不料 + unexpected event", "结果与原先的预料相反。", "Use when the next event is contrary to what was expected.", "他以为足球会停下来，不料足球滚上了马路。", "He thought the ball would stop. Unexpectedly, it rolled onto the road.", true),
+    c("没想到", "to one’s surprise", "情况，没想到＋意外结果", "Situation, 没想到 + surprise", "人物没有预料到接下来发生的事。", "Use when a person did not expect what happened next.", "他打开书包，没想到功课竟然不见了。", "He opened his schoolbag. To his surprise, his homework was missing.", true),
+    c("谁知", "who would have known", "原本情况，谁知＋意外事件", "Expected situation, 谁知 + unexpected event", "用于较有戏剧性的意外转折。", "Use for a more dramatic unexpected turn.", "他刚走出家门，谁知又下起雨来。", "He had just left home when it started raining again."),
+    c("竟然", "unexpectedly / actually", "主语＋竟然＋意外行动", "Subject + 竟然 + surprising action", "强调事情令人惊讶。", "Use to emphasise that an event is surprising.", "平时胆小的他竟然主动上前帮忙。", "Surprisingly, he stepped forward to help."),
+    c("原来", "it turned out that", "观察，原来＋真相", "Observation, 原来 + truth", "终于发现事情的真相或原因。", "Use when the truth or explanation is finally discovered.", "我打开门一看，原来是弟弟回来了。", "I opened the door and discovered that my brother had returned."),
+  ]},
+  { id: "condition", title: "条件", titleEn: "Conditions", colour: "green", items: [
+    c("如果……就……", "if…then", "如果＋条件，就＋结果", "如果 + condition, 就 + result", "提出一个可能的条件和它的结果。", "Use for a possible condition and its result.", "如果你认真检查，就能发现错误。", "If you check carefully, you will find the mistake.", true),
+    c("假如……就……", "supposing…then", "假如＋假设，就＋结果", "假如 + imagined condition, 就 + result", "提出想象或假设的情况。", "Use for an imagined or hypothetical situation.", "假如明天下雨，我们就留在家里。", "If it rains tomorrow, we will stay at home."),
+    c("要是……就……", "if…then", "要是＋条件，就＋结果", "要是 + condition, 就 + result", "如果的口语形式，适合人物对话。", "A conversational form of 如果, useful in dialogue.", "要是你需要帮助，就告诉我。", "If you need help, tell me."),
+    c("只要……就……", "as long as…", "只要＋足够条件，就＋结果", "只要 + sufficient condition, 就 + result", "这个条件一满足，结果便可能发生。", "Use when one condition is enough to produce the result.", "只要认真练习，就能取得进步。", "As long as you practise seriously, you can improve.", true),
+    c("只有……才……", "only if…", "只有＋必要条件，才＋结果", "只有 + necessary condition, 才 + result", "必须满足这个条件，结果才会发生。", "Use when the condition is necessary for the result.", "只有认真检查，才能减少错误。", "Only by checking carefully can you reduce mistakes.", true),
+    c("除非……否则……", "unless…otherwise", "除非＋例外，否则＋结果", "除非 + exception, 否则 + result", "说明唯一的例外和不这样做的后果。", "Use for the only exception and what happens without it.", "除非雨停了，否则比赛无法继续。", "Unless the rain stops, the match cannot continue."),
+    c("即使……也……", "even if…still", "即使＋困难，也＋不变结果", "即使 + difficulty, 也 + unchanged result", "即使出现困难，结果或决定也不改变。", "Use when a result remains unchanged despite difficulty.", "即使遇到困难，他也不会放弃。", "Even if he faces difficulties, he will not give up.", true),
+    c("无论……都……", "no matter…", "无论＋任何情况，都＋结果", "无论 + any situation, 都 + result", "结果适用于所有情况。", "Use when the result applies to every situation.", "无论遇到什么问题，我们都应该保持冷静。", "No matter what problem we face, we should remain calm."),
+    c("不管……都……", "no matter…", "不管＋任何情况，都＋结果", "不管 + any situation, 都 + result", "与无论相近，语气较口语化。", "Similar to 无论 but more conversational.", "不管天气多热，他都坚持练习。", "No matter how hot it was, he continued practising."),
+  ]},
+  { id: "contrast", title: "转折与对比", titleEn: "Contrast", colour: "purple", items: [
+    c("虽然……但是……", "although…however", "虽然＋情况，但是＋相反情况", "虽然 + situation, 但是 + contrast", "两个意思互相对比。", "Use when two ideas contrast with each other.", "虽然他很害怕，但是他还是上前帮忙。", "Although he was frightened, he still stepped forward to help.", true),
+    c("尽管……可是……", "although…nevertheless", "尽管＋情况，可是＋相反情况", "尽管 + situation, 可是 + contrast", "与虽然……但是相近，语气较正式。", "Similar to 虽然…但是, but slightly more formal.", "尽管天气炎热，可是同学们仍然认真练习。", "Although it was hot, the pupils continued practising."),
+    c("但是", "but / however", "想法一，但是＋相反想法", "First idea, 但是 + contrast", "连接两个相反或不同的意思。", "Use to introduce a contrasting idea.", "我想帮助他，但是不知道该怎么做。", "I wanted to help him, but I did not know what to do.", true),
+    c("可是", "but", "想法一，可是＋相反想法", "First idea, 可是 + contrast", "与但是相近，较适合对话。", "Similar to 但是 and slightly more conversational.", "我已经尽力了，可是还是没有成功。", "I tried my best, but I still did not succeed."),
+    c("然而", "however", "想法一，然而＋相反想法", "First idea, 然而 + contrast", "用于较正式的书面转折。", "Use for a formal contrast in writing.", "大家以为他会放弃，然而他坚持到了最后。", "Everyone thought he would give up. However, he persevered."),
+    c("不过", "however / but", "想法一，不过＋补充限制", "First idea, 不过 + qualification", "加入较小或较温和的转折。", "Use for a smaller or gentler contrast.", "这个办法很好，不过需要大家合作。", "This is a good method, but it requires cooperation."),
+    c("反而", "instead / on the contrary", "原先预料，反而＋相反结果", "Expected idea, 反而 + opposite result", "实际结果与预料完全相反。", "Use when the actual result is opposite to what was expected.", "他不但没有生气，反而安慰了我。", "Instead of becoming angry, he comforted me."),
+  ]},
+  { id: "addition", title: "递进与补充", titleEn: "Addition & Progression", colour: "yellow", items: [
+    c("不但……而且……", "not only…but also", "不但＋第一点，而且＋更进一步", "不但 + first point, 而且 + stronger point", "第二个内容比第一个更进一步。", "Use when the second point adds stronger information.", "他不但承认了错误，而且主动道歉。", "He not only admitted his mistake but also apologised.", true),
+    c("不仅……还……", "not only…but also", "不仅＋第一点，还＋补充内容", "不仅 + first point, 还 + additional point", "补充另一个相关的优点或影响。", "Use to add another related point.", "阅读不仅能增加知识，还能提高写作能力。", "Reading not only increases knowledge but also improves writing."),
+    c("既……又……", "both…and", "既＋特点一，又＋特点二", "既 + first quality, 又 + second quality", "同一个人或东西有两个特点。", "Use when one person or thing has two qualities.", "她既善良又有耐心。", "She is both kind and patient.", true),
+    c("又……又……", "both…and", "又＋特点一，又＋特点二", "又 + first quality, 又 + second quality", "连接两个简单的特点或动作。", "Use to connect two simple qualities or actions.", "这个书包又大又重。", "This schoolbag is both large and heavy."),
+    c("除了……还……", "besides…also", "除了＋第一项，还＋补充项", "除了 + first item, 还 + additional item", "在已有内容之外再补充。", "Use to add something beyond what was already mentioned.", "除了小明，其他同学也来帮忙。", "Besides Xiao Ming, the other pupils also helped."),
+    c("而且", "moreover", "内容一，而且＋内容二", "First point, 而且 + additional point", "补充另一个相关内容。", "Use to add another related point.", "他做事认真，而且乐于助人。", "He works seriously and is also helpful."),
+    c("甚至", "even", "内容，甚至＋更强内容", "Point, 甚至 + more extreme point", "加入更令人意外或程度更高的内容。", "Use to add a more surprising or extreme point.", "他忙得忘了吃午餐，甚至错过了休息时间。", "He was so busy that he forgot lunch and even missed his break."),
+  ]},
+  { id: "sequence", title: "顺序与时间", titleEn: "Sequence & Time", colour: "teal", items: [
+    c("首先", "firstly", "首先＋第一点", "首先 + first point", "开始列出步骤或观点。", "Use to introduce the first step or point.", "首先，我们必须了解事情的经过。", "First, we must understand what happened.", true),
+    c("先", "first", "先＋第一个动作", "先 + first action", "说明最先进行的动作。", "Use for the first action in a sequence.", "小明先把老人扶起来。", "Xiao Ming first helped the elderly man up.", true),
+    c("接着", "next", "接着＋下一个动作", "接着 + next action", "紧接着第一件事发生。", "Use for the action immediately following the first.", "接着，他帮老人捡起物品。", "Next, he picked up the man’s belongings.", true),
+    c("然后", "then", "然后＋接下来的动作", "然后 + following action", "一般地说明接下来发生什么。", "Use for the following action.", "然后，他陪老人到一旁休息。", "Then, he accompanied the man to rest.", true),
+    c("随后", "afterwards", "随后＋较后的动作", "随后 + later action", "与然后相近，语气较正式。", "Similar to 然后 but slightly more formal.", "随后，工作人员赶到了现场。", "Afterwards, the staff arrived."),
+    c("最后", "finally", "最后＋最终动作／结果", "最后 + final action or result", "说明事情的最后一步或结局。", "Use for the final action or outcome.", "最后，老人向小明道谢。", "Finally, the elderly man thanked Xiao Ming.", true),
+    c("起初", "at first", "起初＋原本情况", "起初 + original situation", "介绍事情开始时的情况。", "Use to describe the original situation.", "起初，小明不愿意承认错误。", "At first, Xiao Ming refused to admit his mistake."),
+    c("后来", "later", "后来＋之后的变化", "后来 + later change", "一段时间后发生新的情况。", "Use for something that happened after some time.", "后来，他终于明白了事情的严重性。", "Later, he understood the seriousness of the matter."),
+    c("终于", "finally / eventually", "经过等待／努力，终于＋结果", "After waiting or effort, 终于 + result", "经过时间或努力后得到结果。", "Use when a result happens after waiting or effort.", "经过多次尝试，他终于成功了。", "After many attempts, he finally succeeded."),
+    c("当……时", "when", "当＋事情＋时，主要事情", "当 + event + 时, main event", "一个动作在另一个事件发生时出现。", "Use when one event happens during another.", "当我准备离开时，突然听见一声巨响。", "When I was preparing to leave, I heard a loud noise.", true),
+    c("一……就……", "as soon as", "一＋动作一，就＋动作二", "一 + first action, 就 + immediate action", "第二个动作紧接着第一个动作发生。", "Use when the second action follows immediately.", "他一听见铃声，就冲出了教室。", "As soon as he heard the bell, he rushed out.", true),
+    c("先……再……", "first…then", "先＋动作一，再＋动作二", "先 + first action, 再 + second action", "两个有计划的动作依次发生。", "Use for two planned actions in order.", "我们先完成作业，再出去玩。", "We will finish our homework first and then go out."),
+    c("直到……才……", "not until…then", "直到＋较晚时间，才＋结果", "直到 + later point, 才 + result", "结果到了较晚的时候才发生。", "Use when a result happens only at a later point.", "直到老师解释后，他才明白自己的错误。", "He did not understand his mistake until the teacher explained it."),
+    c("自从……以后……", "ever since", "自从＋过去事件＋以后，持续变化", "自从 + past event + 以后, continuing change", "过去一件事开始后，情况一直持续。", "Use for a continuing change beginning from a past event.", "自从那件事以后，他再也不粗心了。", "Ever since that incident, he has not been careless again."),
+  ]},
+  { id: "choice", title: "选择与并列", titleEn: "Choice & Parallel Actions", colour: "pink", items: [
+    c("或者", "or", "选择一＋或者＋选择二", "Choice A + 或者 + choice B", "在陈述句中列出选择。", "Use for alternatives in a statement.", "我们可以乘巴士或者步行回家。", "We can take the bus or walk home."),
+    c("还是", "or", "选择一＋还是＋选择二？", "Choice A + 还是 + choice B?", "在问句中请别人选择。", "Use for alternatives in a question.", "你想喝水还是果汁？", "Would you like water or juice?"),
+    c("不是……就是……", "either…or", "不是＋可能一，就是＋可能二", "不是 + possibility A, 就是 + possibility B", "说明只有两个可能。", "Use when there are two likely possibilities.", "他不是在看书，就是在做功课。", "He is either reading or doing his homework.", true),
+    c("要么……要么……", "either…or", "要么＋选择一，要么＋选择二", "要么 + choice A, 要么 + choice B", "必须在两个行动中选择一个。", "Use when choosing between two actions.", "我们要么现在出发，要么取消计划。", "We must either leave now or cancel the plan."),
+    c("与其……不如……", "rather than…better to", "与其＋较差选择，不如＋较好选择", "与其 + weaker choice, 不如 + better choice", "比较两个做法，并推荐较好的一个。", "Use to compare choices and recommend the better one.", "与其在这里抱怨，不如想办法解决问题。", "Rather than complain, it is better to find a solution."),
+    c("一边……一边……", "while…at the same time", "一边＋动作一，一边＋动作二", "一边 + action A, 一边 + action B", "两个动作同时进行。", "Use when two actions happen at the same time.", "他一边走路，一边和朋友谈话。", "He talked to his friend while walking.", true),
+    c("有的……有的……", "some…others…", "有的＋人物／动作，有的＋人物／动作", "有的 + some, 有的 + others", "不同的人进行不同的动作。", "Use when different people perform different actions.", "有的同学打扫课室，有的同学排列桌椅。", "Some pupils cleaned while others arranged the desks."),
+    c("一会儿……一会儿……", "one moment…another…", "一会儿＋情况一，一会儿＋情况二", "一会儿 + state A, 一会儿 + state B", "情况不断交替变化。", "Use when something changes repeatedly.", "天气一会儿晴，一会儿下雨。", "One moment it was sunny; the next, it was raining."),
+    c("越……越……", "the more…the more", "越＋变化一，越＋变化二", "越 + change A, 越 + change B", "两个变化一起增加。", "Use when one change increases together with another.", "雨越下越大。", "The rain became heavier and heavier."),
+  ]},
+  { id: "purpose", title: "目的与总结", titleEn: "Purpose & Conclusion", colour: "navy", items: [
+    c("为了", "in order to", "为了＋目的，采取行动", "为了 + purpose, action taken", "解释人物为什么采取某个行动。", "Use to explain the purpose of an…222152 tokens truncated…olved": "https://registry.npmjs.org/lightningcss-linux-arm64-gnu/-/lightningcss-linux-arm64-gnu-1.32.0.tgz",
+      "integrity": "sha512-0nnMyoyOLRJXfbMOilaSRcLH3Jw5z9HDNGfT/gwCPgaDjnx0i8w7vBzFLFR1f6CMLKF8gVbebmkUN3fa/kQJpQ==",
+      "cpu": [
+        "arm64"
+      ],
+      "dev": true,
+      "libc": [
+        "glibc"
+      ],
+      "license": "MPL-2.0",
+      "optional": true,
+      "os": [
+        "linux"
+      ],
+      "engines": {
+        "node": ">= 12.0.0"
+      },
+      "funding": {
+        "type": "opencollective",
+        "url": "https://opencollective.com/parcel"
+      }
+    },
+    "node_modules/vite/node_modules/lightningcss-linux-arm64-musl": {
+      "version": "1.32.0",
+      "resolved": "https://registry.npmjs.org/lightningcss-linux-arm64-musl/-/lightningcss-linux-arm64-musl-1.32.0.tgz",
+      "integrity": "sha512-UpQkoenr4UJEzgVIYpI80lDFvRmPVg6oqboNHfoH4CQIfNA+HOrZ7Mo7KZP02dC6LjghPQJeBsvXhJod/wnIBg==",
+      "cpu": [
+        "arm64"
+      ],
+      "dev": true,
+      "libc": [
+        "musl"
+      ],
+      "license": "MPL-2.0",
+      "optional": true,
+      "os": [
+        "linux"
+      ],
+      "engines": {
+        "node": ">= 12.0.0"
+      },
+      "funding": {
+        "type": "opencollective",
+        "url": "https://opencollective.com/parcel"
+      }
+    },
+    "node_modules/vite/node_modules/lightningcss-linux-x64-gnu": {
+      "version": "1.32.0",
+      "resolved": "https://registry.npmjs.org/lightningcss-linux-x64-gnu/-/lightningcss-linux-x64-gnu-1.32.0.tgz",
+      "integrity": "sha512-V7Qr52IhZmdKPVr+Vtw8o+WLsQJYCTd8loIfpDaMRWGUZfBOYEJeyJIkqGIDMZPwPx24pUMfwSxxI8phr/MbOA==",
+      "cpu": [
+        "x64"
+      ],
+      "dev": true,
+      "libc": [
+        "glibc"
+      ],
+      "license": "MPL-2.0",
+      "optional": true,
+      "os": [
+        "linux"
+      ],
+      "engines": {
+        "node": ">= 12.0.0"
+      },
+      "funding": {
+        "type": "opencollective",
+        "url": "https://opencollective.com/parcel"
+      }
+    },
+    "node_modules/vite/node_modules/lightningcss-linux-x64-musl": {
+      "version": "1.32.0",
+      "resolved": "https://registry.npmjs.org/lightningcss-linux-x64-musl/-/lightningcss-linux-x64-musl-1.32.0.tgz",
+      "integrity": "sha512-bYcLp+Vb0awsiXg/80uCRezCYHNg1/l3mt0gzHnWV9XP1W5sKa5/TCdGWaR/zBM2PeF/HbsQv/j2URNOiVuxWg==",
+      "cpu": [
+        "x64"
+      ],
+      "dev": true,
+      "libc": [
+        "musl"
+      ],
+      "license": "MPL-2.0",
+      "optional": true,
+      "os": [
+        "linux"
+      ],
+      "engines": {
+        "node": ">= 12.0.0"
+      },
+      "funding": {
+        "type": "opencollective",
+        "url": "https://opencollective.com/parcel"
+      }
+    },
+    "node_modules/vite/node_modules/lightningcss-win32-arm64-msvc": {
+      "version": "1.32.0",
+      "resolved": "https://registry.npmjs.org/lightningcss-win32-arm64-msvc/-/lightningcss-win32-arm64-msvc-1.32.0.tgz",
+      "integrity": "sha512-8SbC8BR40pS6baCM8sbtYDSwEVQd4JlFTOlaD3gWGHfThTcABnNDBda6eTZeqbofalIJhFx0qKzgHJmcPTnGdw==",
+      "cpu": [
+        "arm64"
+      ],
+      "dev": true,
+      "license": "MPL-2.0",
+      "optional": true,
+      "os": [
+        "win32"
+      ],
+      "engines": {
+        "node": ">= 12.0.0"
+      },
+      "funding": {
+        "type": "opencollective",
+        "url": "https://opencollective.com/parcel"
+      }
+    },
+    "node_modules/vite/node_modules/lightningcss-win32-x64-msvc": {
+      "version": "1.32.0",
+      "resolved": "https://registry.npmjs.org/lightningcss-win32-x64-msvc/-/lightningcss-win32-x64-msvc-1.32.0.tgz",
+      "integrity": "sha512-Amq9B/SoZYdDi1kFrojnoqPLxYhQ4Wo5XiL8EVJrVsB8ARoC1PWW6VGtT0WKCemjy8aC+louJnjS7U18x3b06Q==",
+      "cpu": [
+        "x64"
+      ],
+      "dev": true,
+      "license": "MPL-2.0",
+      "optional": true,
+      "os": [
+        "win32"
+      ],
+      "engines": {
+        "node": ">= 12.0.0"
+      },
+      "funding": {
+        "type": "opencollective",
+        "url": "https://opencollective.com/parcel"
+      }
+    },
+    "node_modules/vite/node_modules/picomatch": {
+      "version": "4.0.4",
+      "resolved": "https://registry.npmjs.org/picomatch/-/picomatch-4.0.4.tgz",
+      "integrity": "sha512-QP88BAKvMam/3NxH6vj2o21R6MjxZUAd6nlwAS/pnGvN9IVLocLHxGYIzFhg6fUQ+5th6P4dv4eW9jX3DSIj7A==",
+      "dev": true,
+      "license": "MIT",
+      "engines": {
+        "node": ">=12"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/jonschlinkert"
+      }
+    },
+    "node_modules/vitefu": {
+      "version": "1.1.3",
+      "resolved": "https://registry.npmjs.org/vitefu/-/vitefu-1.1.3.tgz",
+      "integrity": "sha512-ub4okH7Z5KLjb6hDyjqrGXqWtWvoYdU3IGm/NorpgHncKoLTCfRIbvlhBm7r0YstIaQRYlp4yEbFqDcKSzXSSg==",
+      "dev": true,
+      "license": "MIT",
+      "workspaces": [
+        "tests/deps/*",
+        "tests/projects/*",
+        "tests/projects/workspace/packages/*"
+      ],
+      "peerDependencies": {
+        "vite": "^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0"
+      },
+      "peerDependenciesMeta": {
+        "vite": {
+          "optional": true
+        }
+      }
+    },
+    "node_modules/watchpack": {
+      "version": "2.5.1",
+      "resolved": "https://registry.npmjs.org/watchpack/-/watchpack-2.5.1.tgz",
+      "integrity": "sha512-Zn5uXdcFNIA1+1Ei5McRd+iRzfhENPCe7LeABkJtNulSxjma+l7ltNx55BWZkRlwRnpOgHqxnjyaDgJnNXnqzg==",
+      "dev": true,
+      "license": "MIT",
+      "peer": true,
+      "dependencies": {
+        "glob-to-regexp": "^0.4.1",
+        "graceful-fs": "^4.1.2"
+      },
+      "engines": {
+        "node": ">=10.13.0"
+      }
+    },
+    "node_modules/web-vitals": {
+      "version": "4.2.4",
+      "resolved": "https://registry.npmjs.org/web-vitals/-/web-vitals-4.2.4.tgz",
+      "integrity": "sha512-r4DIlprAGwJ7YM11VZp4R884m0Vmgr6EAKe3P+kO0PPj3Unqyvv59rczf6UiGcb9Z8QxZVcqKNwv/g0WNdWwsw==",
+      "dev": true,
+      "license": "Apache-2.0"
+    },
+    "node_modules/webpack": {
+      "version": "5.106.2",
+      "resolved": "https://registry.npmjs.org/webpack/-/webpack-5.106.2.tgz",
+      "integrity": "sha512-wGN3qcrBQIFmQ/c0AiOAQBvrZ5lmY8vbbMv4Mxfgzqd/B6+9pXtLo73WuS1dSGXM5QYY3hZnIbvx+K1xxe6FyA==",
+      "dev": true,
+      "license": "MIT",
+      "peer": true,
+      "dependencies": {
+        "@types/eslint-scope": "^3.7.7",
+        "@types/estree": "^1.0.8",
+        "@types/json-schema": "^7.0.15",
+        "@webassemblyjs/ast": "^1.14.1",
+        "@webassemblyjs/wasm-edit": "^1.14.1",
+        "@webassemblyjs/wasm-parser": "^1.14.1",
+        "acorn": "^8.16.0",
+        "acorn-import-phases": "^1.0.3",
+        "browserslist": "^4.28.1",
+        "chrome-trace-event": "^1.0.2",
+        "enhanced-resolve": "^5.20.0",
+        "es-module-lexer": "^2.0.0",
+        "eslint-scope": "5.1.1",
+        "events": "^3.2.0",
+        "glob-to-regexp": "^0.4.1",
+        "graceful-fs": "^4.2.11",
+        "loader-runner": "^4.3.1",
+        "mime-db": "^1.54.0",
+        "neo-async": "^2.6.2",
+        "schema-utils": "^4.3.3",
+        "tapable": "^2.3.0",
+        "terser-webpack-plugin": "^5.3.17",
+        "watchpack": "^2.5.1",
+        "webpack-sources": "^3.3.4"
+      },
+      "bin": {
+        "webpack": "bin/webpack.js"
+      },
+      "engines": {
+        "node": ">=10.13.0"
+      },
+      "funding": {
+        "type": "opencollective",
+        "url": "https://opencollective.com/webpack"
+      },
+      "peerDependenciesMeta": {
+        "webpack-cli": {
+          "optional": true
+        }
+      }
+    },
+    "node_modules/webpack-sources": {
+      "version": "3.4.1",
+      "resolved": "https://registry.npmjs.org/webpack-sources/-/webpack-sources-3.4.1.tgz",
+      "integrity": "sha512-eACpxRN02yaawnt+uUNIF7Qje6A9zArxBbcAJjK1PK3S9Ycg5jIuJ8pW4q8EMnwNZCEGltcjkRx1QzOxOkKD8A==",
+      "dev": true,
+      "license": "MIT",
+      "engines": {
+        "node": ">=10.13.0"
+      }
+    },
+    "node_modules/webpack/node_modules/eslint-scope": {
+      "version": "5.1.1",
+      "resolved": "https://registry.npmjs.org/eslint-scope/-/eslint-scope-5.1.1.tgz",
+      "integrity": "sha512-2NxwbF/hZ0KpepYN0cNbo+FN6XoK7GaHlQhgx/hIZl6Va0bF45RQOOwhLIy8lQDbuCiadSLCBnH2CFYquit5bw==",
+      "dev": true,
+      "license": "BSD-2-Clause",
+      "peer": true,
+      "dependencies": {
+        "esrecurse": "^4.3.0",
+        "estraverse": "^4.1.1"
+      },
+      "engines": {
+        "node": ">=8.0.0"
+      }
+    },
+    "node_modules/webpack/node_modules/estraverse": {
+      "version": "4.3.0",
+      "resolved": "https://registry.npmjs.org/estraverse/-/estraverse-4.3.0.tgz",
+      "integrity": "sha512-39nnKffWz8xN1BU/2c79n9nB9HDzo0niYUqx6xyqUnyoAnQyyWpOTdZEeiCch8BBu515t4wp9ZmgVfVhn9EBpw==",
+      "dev": true,
+      "license": "BSD-2-Clause",
+      "peer": true,
+      "engines": {
+        "node": ">=4.0"
+      }
+    },
+    "node_modules/which": {
+      "version": "2.0.2",
+      "resolved": "https://registry.npmjs.org/which/-/which-2.0.2.tgz",
+      "integrity": "sha512-BLI3Tl1TW3Pvl70l3yq3Y64i+awpwXqsGBYWkkqMtnbXgrMD+yj7rhW0kuEDxzJaYXGjEW5ogapKNMEKNMjibA==",
+      "dev": true,
+      "license": "ISC",
+      "dependencies": {
+        "isexe": "^2.0.0"
+      },
+      "bin": {
+        "node-which": "bin/node-which"
+      },
+      "engines": {
+        "node": ">= 8"
+      }
+    },
+    "node_modules/which-boxed-primitive": {
+      "version": "1.1.1",
+      "resolved": "https://registry.npmjs.org/which-boxed-primitive/-/which-boxed-primitive-1.1.1.tgz",
+      "integrity": "sha512-TbX3mj8n0odCBFVlY8AxkqcHASw3L60jIuF8jFP78az3C2YhmGvqbHBpAjTRH2/xqYunrJ9g1jSyjCjpoWzIAA==",
+      "dev": true,
+      "license": "MIT",
+      "dependencies": {
+        "is-bigint": "^1.1.0",
+        "is-boolean-object": "^1.2.1",
+        "is-number-object": "^1.1.1",
+        "is-string": "^1.1.1",
+        "is-symbol": "^1.1.1"
+      },
+      "engines": {
+        "node": ">= 0.4"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/ljharb"
+      }
+    },
+    "node_modules/which-builtin-type": {
+      "version": "1.2.1",
+      "resolved": "https://registry.npmjs.org/which-builtin-type/-/which-builtin-type-1.2.1.tgz",
+      "integrity": "sha512-6iBczoX+kDQ7a3+YJBnh3T+KZRxM/iYNPXicqk66/Qfm1b93iu+yOImkg0zHbj5LNOcNv1TEADiZ0xa34B4q6Q==",
+      "dev": true,
+      "license": "MIT",
+      "dependencies": {
+        "call-bound": "^1.0.2",
+        "function.prototype.name": "^1.1.6",
+        "has-tostringtag": "^1.0.2",
+        "is-async-function": "^2.0.0",
+        "is-date-object": "^1.1.0",
+        "is-finalizationregistry": "^1.1.0",
+        "is-generator-function": "^1.0.10",
+        "is-regex": "^1.2.1",
+        "is-weakref": "^1.0.2",
+        "isarray": "^2.0.5",
+        "which-boxed-primitive": "^1.1.0",
+        "which-collection": "^1.0.2",
+        "which-typed-array": "^1.1.16"
+      },
+      "engines": {
+        "node": ">= 0.4"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/ljharb"
+      }
+    },
+    "node_modules/which-collection": {
+      "version": "1.0.2",
+      "resolved": "https://registry.npmjs.org/which-collection/-/which-collection-1.0.2.tgz",
+      "integrity": "sha512-K4jVyjnBdgvc86Y6BkaLZEN933SwYOuBFkdmBu9ZfkcAbdVbpITnDmjvZ/aQjRXQrv5EPkTnD1s39GiiqbngCw==",
+      "dev": true,
+      "license": "MIT",
+      "dependencies": {
+        "is-map": "^2.0.3",
+        "is-set": "^2.0.3",
+        "is-weakmap": "^2.0.2",
+        "is-weakset": "^2.0.3"
+      },
+      "engines": {
+        "node": ">= 0.4"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/ljharb"
+      }
+    },
+    "node_modules/which-typed-array": {
+      "version": "1.1.20",
+      "resolved": "https://registry.npmjs.org/which-typed-array/-/which-typed-array-1.1.20.tgz",
+      "integrity": "sha512-LYfpUkmqwl0h9A2HL09Mms427Q1RZWuOHsukfVcKRq9q95iQxdw0ix1JQrqbcDR9PH1QDwf5Qo8OZb5lksZ8Xg==",
+      "dev": true,
+      "license": "MIT",
+      "dependencies": {
+        "available-typed-arrays": "^1.0.7",
+        "call-bind": "^1.0.8",
+        "call-bound": "^1.0.4",
+        "for-each": "^0.3.5",
+        "get-proto": "^1.0.1",
+        "gopd": "^1.2.0",
+        "has-tostringtag": "^1.0.2"
+      },
+      "engines": {
+        "node": ">= 0.4"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/ljharb"
+      }
+    },
+    "node_modules/word-wrap": {
+      "version": "1.2.5",
+      "resolved": "https://registry.npmjs.org/word-wrap/-/word-wrap-1.2.5.tgz",
+      "integrity": "sha512-BN22B5eaMMI9UMtjrGd5g5eCYPpCPDUy0FJXbYsaT5zYxjFOckS53SQDE3pWkVoWpHXVb3BrYcEN4Twa55B5cA==",
+      "dev": true,
+      "license": "MIT",
+      "engines": {
+        "node": ">=0.10.0"
+      }
+    },
+    "node_modules/workerd": {
+      "version": "1.20260515.1",
+      "resolved": "https://registry.npmjs.org/workerd/-/workerd-1.20260515.1.tgz",
+      "integrity": "sha512-MjKOJLcvU45xXedQowvuiHtJTxu4WTHYQeIlF7YmjuqhiI6dImTFxWCEoRQHiskztxuVSNEmdO7/0UfDu6OMnQ==",
+      "dev": true,
+      "hasInstallScript": true,
+      "license": "Apache-2.0",
+      "bin": {
+        "workerd": "bin/workerd"
+      },
+      "engines": {
+        "node": ">=16"
+      },
+      "optionalDependencies": {
+        "@cloudflare/workerd-darwin-64": "1.20260515.1",
+        "@cloudflare/workerd-darwin-arm64": "1.20260515.1",
+        "@cloudflare/workerd-linux-64": "1.20260515.1",
+        "@cloudflare/workerd-linux-arm64": "1.20260515.1",
+        "@cloudflare/workerd-windows-64": "1.20260515.1"
+      }
+    },
+    "node_modules/wrangler": {
+      "version": "4.92.0",
+      "resolved": "https://registry.npmjs.org/wrangler/-/wrangler-4.92.0.tgz",
+      "integrity": "sha512-/DKpQHPxkuZbQsO9dFW2700VTD/4DSZMHjy92fO/frNoDRi/zQsFCAd2ONCV6TGqcUoXcP3D8Bo2gj/L4M0qQQ==",
+      "dev": true,
+      "license": "MIT OR Apache-2.0",
+      "dependencies": {
+        "@cloudflare/kv-asset-handler": "0.5.0",
+        "@cloudflare/unenv-preset": "2.16.1",
+        "blake3-wasm": "2.1.5",
+        "esbuild": "0.27.3",
+        "miniflare": "4.20260515.0",
+        "path-to-regexp": "6.3.0",
+        "unenv": "2.0.0-rc.24",
+        "workerd": "1.20260515.1"
+      },
+      "bin": {
+        "wrangler": "bin/wrangler.js",
+        "wrangler2": "bin/wrangler.js"
+      },
+      "engines": {
+        "node": ">=22.0.0"
+      },
+      "optionalDependencies": {
+        "fsevents": "~2.3.2"
+      },
+      "peerDependencies": {
+        "@cloudflare/workers-types": "^4.20260515.1"
+      },
+      "peerDependenciesMeta": {
+        "@cloudflare/workers-types": {
+          "optional": true
+        }
+      }
+    },
+    "node_modules/wrangler/node_modules/@esbuild/aix-ppc64": {
+      "version": "0.27.3",
+      "resolved": "https://registry.npmjs.org/@esbuild/aix-ppc64/-/aix-ppc64-0.27.3.tgz",
+      "integrity": "sha512-9fJMTNFTWZMh5qwrBItuziu834eOCUcEqymSH7pY+zoMVEZg3gcPuBNxH1EvfVYe9h0x/Ptw8KBzv7qxb7l8dg==",
+      "cpu": [
+        "ppc64"
+      ],
+      "dev": true,
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "aix"
+      ],
+      "engines": {
+        "node": ">=18"
+      }
+    },
+    "node_modules/wrangler/node_modules/@esbuild/android-arm": {
+      "version": "0.27.3",
+      "resolved": "https://registry.npmjs.org/@esbuild/android-arm/-/android-arm-0.27.3.tgz",
+      "integrity": "sha512-i5D1hPY7GIQmXlXhs2w8AWHhenb00+GxjxRncS2ZM7YNVGNfaMxgzSGuO8o8SJzRc/oZwU2bcScvVERk03QhzA==",
+      "cpu": [
+        "arm"
+      ],
+      "dev": true,
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "android"
+      ],
+      "engines": {
+        "node": ">=18"
+      }
+    },
+    "node_modules/wrangler/node_modules/@esbuild/android-arm64": {
+      "version": "0.27.3",
+      "resolved": "https://registry.npmjs.org/@esbuild/android-arm64/-/android-arm64-0.27.3.tgz",
+      "integrity": "sha512-YdghPYUmj/FX2SYKJ0OZxf+iaKgMsKHVPF1MAq/P8WirnSpCStzKJFjOjzsW0QQ7oIAiccHdcqjbHmJxRb/dmg==",
+      "cpu": [
+        "arm64"
+      ],
+      "dev": true,
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "android"
+      ],
+      "engines": {
+        "node": ">=18"
+      }
+    },
+    "node_modules/wrangler/node_modules/@esbuild/android-x64": {
+      "version": "0.27.3",
+      "resolved": "https://registry.npmjs.org/@esbuild/android-x64/-/android-x64-0.27.3.tgz",
+      "integrity": "sha512-IN/0BNTkHtk8lkOM8JWAYFg4ORxBkZQf9zXiEOfERX/CzxW3Vg1ewAhU7QSWQpVIzTW+b8Xy+lGzdYXV6UZObQ==",
+      "cpu": [
+        "x64"
+      ],
+      "dev": true,
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "android"
+      ],
+      "engines": {
+        "node": ">=18"
+      }
+    },
+    "node_modules/wrangler/node_modules/@esbuild/darwin-arm64": {
+      "version": "0.27.3",
+      "resolved": "https://registry.npmjs.org/@esbuild/darwin-arm64/-/darwin-arm64-0.27.3.tgz",
+      "integrity": "sha512-Re491k7ByTVRy0t3EKWajdLIr0gz2kKKfzafkth4Q8A5n1xTHrkqZgLLjFEHVD+AXdUGgQMq+Godfq45mGpCKg==",
+      "cpu": [
+        "arm64"
+      ],
+      "dev": true,
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "darwin"
+      ],
+      "engines": {
+        "node": ">=18"
+      }
+    },
+    "node_modules/wrangler/node_modules/@esbuild/darwin-x64": {
+      "version": "0.27.3",
+      "resolved": "https://registry.npmjs.org/@esbuild/darwin-x64/-/darwin-x64-0.27.3.tgz",
+      "integrity": "sha512-vHk/hA7/1AckjGzRqi6wbo+jaShzRowYip6rt6q7VYEDX4LEy1pZfDpdxCBnGtl+A5zq8iXDcyuxwtv3hNtHFg==",
+      "cpu": [
+        "x64"
+      ],
+      "dev": true,
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "darwin"
+      ],
+      "engines": {
+        "node": ">=18"
+      }
+    },
+    "node_modules/wrangler/node_modules/@esbuild/freebsd-arm64": {
+      "version": "0.27.3",
+      "resolved": "https://registry.npmjs.org/@esbuild/freebsd-arm64/-/freebsd-arm64-0.27.3.tgz",
+      "integrity": "sha512-ipTYM2fjt3kQAYOvo6vcxJx3nBYAzPjgTCk7QEgZG8AUO3ydUhvelmhrbOheMnGOlaSFUoHXB6un+A7q4ygY9w==",
+      "cpu": [
+        "arm64"
+      ],
+      "dev": true,
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "freebsd"
+      ],
+      "engines": {
+        "node": ">=18"
+      }
+    },
+    "node_modules/wrangler/node_modules/@esbuild/freebsd-x64": {
       "version": "0.27.3",
       "resolved": "https://registry.npmjs.org/@esbuild/freebsd-x64/-/freebsd-x64-0.27.3.tgz",
       "integrity": "sha512-dDk0X87T7mI6U3K9VjWtHOXqwAMJBNN2r7bejDsc+j03SEjtD9HrOl8gVFByeM0aJksoUuUVU9TBaZa2rgj0oA==",
