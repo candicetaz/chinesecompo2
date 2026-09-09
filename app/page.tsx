@@ -53,7 +53,7 @@ export default function GrammarToolkit() {
       <div className="mx-auto max-w-6xl px-4 pt-5 sm:px-6 sm:pt-8">
         <section className="grammar-intro">
           <div><span className="grammar-badge">P5</span><h1>把简单句一步一步写完整</h1><p>Build a clear Chinese sentence one layer at a time.</p></div>
-          <div className="grammar-master-formula"><span>记住顺序 · Remember</span><strong>基本句 → 结构词 → 介词 → 副词 → 形容词 → 结果 → 连接</strong></div>
+          <div className="grammar-master-formula"><span>记住顺序 · Remember</span><strong>基本句 → 5W+1H → 结构词 → 介词 → 副词 → 形容词 → 结果 → 连接</strong></div>
         </section>
 
         <nav className="grammar-tabs" aria-label="语法工具">
