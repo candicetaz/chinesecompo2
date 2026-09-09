@@ -18,15 +18,95 @@ export type ConnectorGroup = {
   items: GrammarItem[];
 };
 
-export const SENTENCE_LADDER = [
-  { label: "基本句", labelEn: "Basic sentence", addition: "主语＋动词＋宾语", additionEn: "Subject + verb + object", sentence: "小明扔球。" },
-  { label: "结构词", labelEn: "Structural words", addition: "把、了", additionEn: "Add 把 and 了", sentence: "小明把球扔了出去。" },
-  { label: "介词", labelEn: "Prepositions", addition: "在＋地点；向＋目标", additionEn: "Add place, direction or target", sentence: "小明在操场上把球扔向志强。" },
-  { label: "副词", labelEn: "Adverbs", addition: "怎样＋地＋动词", additionEn: "Add how the action was done", sentence: "小明在操场上用力地把球扔向志强。" },
-  { label: "形容词", labelEn: "Adjectives", addition: "形容词＋的＋名词", additionEn: "Describe a person or thing", sentence: "顽皮的小明在操场上用力地把球扔向志强。" },
-  { label: "结果", labelEn: "Result", addition: "写清楚谁／什么造成什么结果", additionEn: "Name the subject and show the result clearly", sentence: "顽皮的小明在操场上用力地把球扔向志强。球砸中了志强的头。" },
-  { label: "连接", labelEn: "Connect", addition: "不料＋意外结果", additionEn: "Link an unexpected result", sentence: "下课时，顽皮的小明在操场上用力地把球扔向志强。不料，球砸中了志强的头。" },
+export type SentenceLadderStep = {
+  label: string;
+  labelEn: string;
+  addition: string;
+  additionEn: string;
+  sentence: string;
+};
+
+export type SentenceLadderExample = {
+  id: string;
+  title: string;
+  titleEn: string;
+  steps: SentenceLadderStep[];
+};
+
+export const SENTENCE_LADDERS: SentenceLadderExample[] = [
+  {
+    id: "ball",
+    title: "扔球意外",
+    titleEn: "Throwing a ball",
+    steps: [
+      { label: "基本句", labelEn: "Basic sentence", addition: "主语＋动词＋宾语", additionEn: "Subject + verb + object", sentence: "小明扔球。" },
+      { label: "结构词", labelEn: "Structural words", addition: "把、了", additionEn: "Add 把 and 了", sentence: "小明把球扔了出去。" },
+      { label: "介词", labelEn: "Prepositions", addition: "在＋地点；向＋目标", additionEn: "Add place, direction or target", sentence: "小明在操场上把球扔向志强。" },
+      { label: "副词", labelEn: "Adverbs", addition: "怎样＋地＋动词", additionEn: "Add how the action was done", sentence: "小明在操场上用力地把球扔向志强。" },
+      { label: "形容词", labelEn: "Adjectives", addition: "形容词＋的＋名词", additionEn: "Describe a person or thing", sentence: "顽皮的小明在操场上用力地把球扔向志强。" },
+      { label: "结果", labelEn: "Result", addition: "写清楚谁／什么造成什么结果", additionEn: "Name the subject and show the result clearly", sentence: "顽皮的小明在操场上用力地把球扔向志强。球砸中了志强的头。" },
+      { label: "连接", labelEn: "Connect", addition: "不料＋意外结果", additionEn: "Link an unexpected result", sentence: "下课时，顽皮的小明在操场上用力地把球扔向志强。不料，球砸中了志强的头。" },
+    ],
+  },
+  {
+    id: "wallet",
+    title: "拾金不昧",
+    titleEn: "Returning a wallet",
+    steps: [
+      { label: "基本句", labelEn: "Basic sentence", addition: "主语＋动词＋宾语", additionEn: "Subject + verb + object", sentence: "小丽捡钱包。" },
+      { label: "结构词", labelEn: "Structural words", addition: "了、一个", additionEn: "Show a completed action", sentence: "小丽捡到了一个钱包。" },
+      { label: "介词", labelEn: "Prepositions", addition: "在＋地点", additionEn: "Add where it happened", sentence: "放学后，小丽在食堂里捡到了一个钱包。" },
+      { label: "副词", labelEn: "Adverbs", addition: "意外地", additionEn: "Add how it happened", sentence: "放学后，小丽在食堂里意外地捡到了一个钱包。" },
+      { label: "形容词", labelEn: "Adjectives", addition: "善良的、黑色的", additionEn: "Describe the person and object", sentence: "放学后，善良的小丽在食堂里意外地捡到了一个黑色的钱包。" },
+      { label: "结果", labelEn: "Result", addition: "写出新的发现", additionEn: "Show what she discovered", sentence: "放学后，善良的小丽在食堂里意外地捡到了一个黑色的钱包。她发现钱包里有一张学生证。" },
+      { label: "连接", labelEn: "Connect", addition: "于是＋下一步行动", additionEn: "Link the situation to her next action", sentence: "放学后，善良的小丽在食堂里意外地捡到了一个黑色的钱包。她发现钱包里有一张学生证，于是立刻把钱包交给了老师。" },
+    ],
+  },
+  {
+    id: "bottle",
+    title: "打翻水瓶",
+    titleEn: "Spilling water",
+    steps: [
+      { label: "基本句", labelEn: "Basic sentence", addition: "主语＋动词＋宾语", additionEn: "Subject + verb + object", sentence: "志强碰水瓶。" },
+      { label: "结构词", labelEn: "Structural words", addition: "把、了", additionEn: "Show what was affected", sentence: "志强把水瓶碰倒了。" },
+      { label: "介词", labelEn: "Prepositions", addition: "在＋地点", additionEn: "Add where it happened", sentence: "志强在课室里把水瓶碰倒了。" },
+      { label: "副词", labelEn: "Adverbs", addition: "不小心地", additionEn: "Add how it happened", sentence: "志强在课室里不小心地把水瓶碰倒了。" },
+      { label: "形容词", labelEn: "Adjectives", addition: "粗心的、装满水的", additionEn: "Describe the person and object", sentence: "粗心的志强在课室里不小心地把装满水的水瓶碰倒了。" },
+      { label: "结果", labelEn: "Result", addition: "写清楚造成的后果", additionEn: "Show the consequence clearly", sentence: "粗心的志强在课室里不小心地把装满水的水瓶碰倒了。水流满桌面，弄湿了同桌的作业。" },
+      { label: "连接", labelEn: "Connect", addition: "结果＋实际后果", additionEn: "Connect the action to its consequence", sentence: "粗心的志强在课室里不小心地把装满水的水瓶碰倒了。结果，水流满桌面，弄湿了同桌的作业。" },
+    ],
+  },
+  {
+    id: "helping",
+    title: "帮助老人",
+    titleEn: "Helping an elderly person",
+    steps: [
+      { label: "基本句", labelEn: "Basic sentence", addition: "主语＋动词＋宾语", additionEn: "Subject + verb + object", sentence: "小华扶老奶奶。" },
+      { label: "结构词", labelEn: "Structural words", addition: "把、了", additionEn: "Show the completed action", sentence: "小华把老奶奶扶了起来。" },
+      { label: "介词", labelEn: "Prepositions", addition: "在＋地点", additionEn: "Add where it happened", sentence: "小华在巴士站把老奶奶扶了起来。" },
+      { label: "副词", labelEn: "Adverbs", addition: "小心翼翼地", additionEn: "Add how he helped", sentence: "小华在巴士站小心翼翼地把老奶奶扶了起来。" },
+      { label: "形容词", labelEn: "Adjectives", addition: "热心的", additionEn: "Describe the person", sentence: "热心的小华在巴士站小心翼翼地把老奶奶扶了起来。" },
+      { label: "结果", labelEn: "Result", addition: "写出帮助后的结果", additionEn: "Show what happened after the help", sentence: "热心的小华在巴士站小心翼翼地把老奶奶扶了起来。老奶奶终于站稳了。" },
+      { label: "连接", labelEn: "Connect", addition: "看见……于是……", additionEn: "Connect what he saw to what he did", sentence: "小华看见一位老奶奶跌倒在巴士站旁，于是赶紧走上前，小心翼翼地把她扶了起来。老奶奶终于站稳了。" },
+    ],
+  },
+  {
+    id: "pencil-case",
+    title: "寻找铅笔盒",
+    titleEn: "Finding a pencil case",
+    steps: [
+      { label: "基本句", labelEn: "Basic sentence", addition: "主语＋动词＋宾语", additionEn: "Subject + verb + object", sentence: "小杰翻书包。" },
+      { label: "结构词", labelEn: "Structural words", addition: "把、了", additionEn: "Show what was affected", sentence: "小杰把书包翻了一遍。" },
+      { label: "介词", labelEn: "Prepositions", addition: "在＋地点", additionEn: "Add where he searched", sentence: "小杰在课室里把书包翻了一遍。" },
+      { label: "副词", labelEn: "Adverbs", addition: "焦急地", additionEn: "Add how he searched", sentence: "小杰在课室里焦急地把书包翻了一遍。" },
+      { label: "形容词", labelEn: "Adjectives", addition: "粗心的、蓝色的", additionEn: "Describe the person and object", sentence: "粗心的小杰在课室里焦急地把书包翻了一遍，却找不到蓝色的铅笔盒。" },
+      { label: "结果", labelEn: "Result", addition: "写出最后发现的情况", additionEn: "Show what he finally discovered", sentence: "粗心的小杰在课室里焦急地把书包翻了一遍，却找不到蓝色的铅笔盒。他最后在桌子下发现了它。" },
+      { label: "连接", labelEn: "Connect", addition: "原来＋真相", additionEn: "Reveal what had happened", sentence: "粗心的小杰在课室里焦急地四处寻找蓝色的铅笔盒。原来，铅笔盒不知何时掉到了桌子下。" },
+    ],
+  },
 ];
+
+export const SENTENCE_LADDER = SENTENCE_LADDERS[0].steps;
 
 export const STRUCTURAL_WORDS: GrammarItem[] = [
   { word: "的", english: "describes a noun / possession", formula: "修饰词＋的＋名词", formulaEn: "Description + 的 + noun", when: "形容人物、地方或东西。", whenEn: "Use before the person, place or thing being described.", example: "顽皮的男孩跑出了教室。", translation: "The mischievous boy ran out of the classroom.", priority: true },

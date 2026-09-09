@@ -1,8 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { BookOpen, Check, Layers3, Search, Sparkles, Waypoints } from "lucide-react";
-import { ADJECTIVES, ADVERBS, CONNECTOR_CHOOSER, CONNECTOR_GROUPS, PRACTICE_QUESTIONS, PREPOSITIONS, SENTENCE_LADDER, STRUCTURAL_WORDS, type GrammarItem } from "./grammar-data";
+import { BookOpen, Check, Layers3, RotateCcw, Search, Sparkles, Waypoints } from "lucide-react";
+import { ADJECTIVES, ADVERBS, CONNECTOR_CHOOSER, CONNECTOR_GROUPS, PRACTICE_QUESTIONS, PREPOSITIONS, SENTENCE_LADDERS, STRUCTURAL_WORDS, type GrammarItem } from "./grammar-data";
 
 type View = "builder" | "structure" | "adverbs" | "adjectives" | "prepositions" | "connectors" | "practice";
 
@@ -19,6 +19,7 @@ const VIEWS: { id: View; label: string; labelEn: string }[] = [
 export default function GrammarToolkit() {
   const [view, setView] = useState<View>("builder");
   const [query, setQuery] = useState("");
+  const [ladderExample, setLadderExample] = useState(0);
   const [ladderStep, setLadderStep] = useState(0);
   const [connectorGroup, setConnectorGroup] = useState("all");
   const [answers, setAnswers] = useState<Record<number, string>>({});
@@ -36,6 +37,9 @@ export default function GrammarToolkit() {
 
   const score = PRACTICE_QUESTIONS.reduce((total, question, index) => total + (answers[index] === question.answer ? 1 : 0), 0);
   const switchView = (next: View) => { setView(next); setQuery(""); window.scrollTo({ top: 0, behavior: "smooth" }); };
+  const currentLadder = SENTENCE_LADDERS[ladderExample];
+  const resetLadder = () => setLadderStep(0);
+  const chooseLadder = (index: number) => { setLadderExample(index); setLadderStep(0); };
 
   return (
     <main className="grammar-app min-h-screen pb-20">
@@ -63,9 +67,15 @@ export default function GrammarToolkit() {
         {view === "builder" && (
           <section className="grammar-section builder-section">
             <div className="grammar-section-title"><span><Layers3 className="h-5 w-5" /></span><div><h2>扩句阶梯</h2><p>Start simple. Add only one useful layer each time.</p></div></div>
+            <div className="ladder-example-panel">
+              <div className="ladder-example-heading"><div><strong>选择例子</strong><span>Choose an example</span></div><button type="button" onClick={resetLadder}><RotateCcw className="h-4 w-4" />重新开始 · Reset</button></div>
+              <div className="ladder-example-list">
+                {SENTENCE_LADDERS.map((example, index) => <button key={example.id} type="button" aria-pressed={ladderExample === index} className={ladderExample === index ? "active" : ""} onClick={() => chooseLadder(index)}><strong>{example.title}</strong><span>{example.titleEn}</span></button>)}
+              </div>
+            </div>
             <div className="ladder-layout">
               <div className="ladder-steps">
-                {SENTENCE_LADDER.map((step, index) => (
+                {currentLadder.steps.map((step, index) => (
                   <button key={step.label} type="button" className={index === ladderStep ? "active" : index < ladderStep ? "done" : ""} onClick={() => setLadderStep(index)}>
                     <span>{index < ladderStep ? <Check className="h-4 w-4" /> : index + 1}</span>
                     <div><strong>{step.label}</strong><small>{step.labelEn}</small></div>
@@ -73,12 +83,12 @@ export default function GrammarToolkit() {
                 ))}
               </div>
               <article className="ladder-card">
-                <div className="ladder-card-top"><span>第 {ladderStep + 1} 层 · Layer {ladderStep + 1}</span><b>{SENTENCE_LADDER[ladderStep].label} · {SENTENCE_LADDER[ladderStep].labelEn}</b></div>
-                <div className="ladder-formula"><small>加入什么 · What to add</small><strong>{SENTENCE_LADDER[ladderStep].addition}</strong><span>{SENTENCE_LADDER[ladderStep].additionEn}</span></div>
-                <p className="ladder-sentence">{SENTENCE_LADDER[ladderStep].sentence}</p>
+                <div className="ladder-card-top"><span>第 {ladderStep + 1} 层 · Layer {ladderStep + 1}</span><b>{currentLadder.steps[ladderStep].label} · {currentLadder.steps[ladderStep].labelEn}</b></div>
+                <div className="ladder-formula"><small>加入什么 · What to add</small><strong>{currentLadder.steps[ladderStep].addition}</strong><span>{currentLadder.steps[ladderStep].additionEn}</span></div>
+                <p className="ladder-sentence">{currentLadder.steps[ladderStep].sentence}</p>
                 <div className="ladder-actions">
                   <button type="button" disabled={ladderStep === 0} onClick={() => setLadderStep((step) => Math.max(0, step - 1))}>上一层</button>
-                  <button type="button" disabled={ladderStep === SENTENCE_LADDER.length - 1} onClick={() => setLadderStep((step) => Math.min(SENTENCE_LADDER.length - 1, step + 1))}>加下一层 →</button>
+                  <button type="button" disabled={ladderStep === currentLadder.steps.length - 1} onClick={() => setLadderStep((step) => Math.min(currentLadder.steps.length - 1, step + 1))}>加下一层 →</button>
                 </div>
               </article>
             </div>
